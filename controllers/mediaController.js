@@ -36,9 +36,6 @@ exports.deleteItem=async(req,res)=>{
           return res.status(404).send("Not found");
         }
         //allow deletion only if the user pwns this note
-        if (note.user.toString() !== req.user.id) {
-          return res.status(401).send("Not Allowed");
-        }
         note = await Media.findByIdAndDelete(req.params.id);
         return res.json({ Success: "Note has been successfully deleted!"});
       } catch (error) {
