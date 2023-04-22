@@ -6,24 +6,43 @@ exports.getAll=async(req,res)=>{
         res.json(media);
     }catch(err){
         console.log(err)
-        res.status(400).json(error)
+        res.status(400).json(err)
     }
 }
 
 
 exports.create=async(req,res)=>{
-    const {name}=req.body
-     
-    let videopath="\\"+req.file.path
     try{
         const createMedia=Media.create({
-            name,
-            videos:videopath
+            name : req.body.name,
+            description : req.body.description,
+            category : req.body.category,
+            speaker : req.body.speaker,
+            videos : req.body.videos
         })
-        res.json(createMedia)
+        res.send(createMedia)
 
     }catch(err){
         console.log(err)
         res.status(400).json(err)
     }
+}
+
+exports.deleteItem=async(req,res)=>{
+    try {
+        //find the note to be deleted and delete it
+        let note = await Media.findById(req.params.id);
+        if (!note) {
+          return res.status(404).send("Not found");
+        }
+        //allow deletion only if the user pwns this note
+        if (note.user.toString() !== req.user.id) {
+          return res.status(401).send("Not Allowed");
+        }
+        note = await Media.findByIdAndDelete(req.params.id);
+        return res.json({ Success: "Note has been successfully deleted!"});
+      } catch (error) {
+        console.log(error.message);
+        res.status(500).send("Internal Server Error");
+      }
 }

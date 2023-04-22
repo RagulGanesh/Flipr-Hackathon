@@ -8,30 +8,35 @@ const multer=require('multer')
 const fs=require('fs')
 const path=require('path')
 
-const storage=multer.diskStorage({
-    destination:function(req,file,cb){
-        if(!fs.existsSync("public")){
-            fs.mkdirSync("public")
-        }
-        if(!fs.existsSync("public/videos")){
-            fs.mkdirSync("public/videos")
-        }
+// const storage=multer.diskStorage({
+//     destination:function(req,file,cb){
+//         if(!fs.existsSync("public")){
+//             fs.mkdirSync("public")
+//         }
+//         if(!fs.existsSync("public/videos")){
+//             fs.mkdirSync("public/videos")
+//         }
 
-        cb(null,"public/videos")
-    },
-    filename:function(req,file,cb){
-        cb(null,Date.now()+file.originalname)
-    }
-})
+//         cb(null,"public/videos")
+//     },
+//     filename:function(req,file,cb){
+//         cb(null,Date.now()+file.originalname)
+//     }
+// })
 
-const upload=multer({
-    storage:storage,
+// const upload=multer({
+//     storage:storage,
     
-})
+// })
 
 
 router.get('/all',mediaController.getAll)
 
-router.post('/create',upload.single('videos'),mediaController.create)
+router.post('/create',mediaController.create)
+
+
+router.delete('/deleteitem/:id',mediaController.deleteItem)
+
+
 
 module.exports=router

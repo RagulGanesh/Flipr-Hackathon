@@ -7,6 +7,18 @@ const MediaSchema = new Schema({
         type: String,
         required : true,
     },
+    description:{
+        type: String,
+        required : true,
+    },
+    category:{
+        type: String,
+        required : true,
+    },
+    speaker:{
+        type: String,
+        required : true,
+    },
     videos:{
         type: String,
     }
