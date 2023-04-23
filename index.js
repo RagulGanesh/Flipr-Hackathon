@@ -14,6 +14,7 @@ app.use(cors())
 app.use('/public',express.static(path.join(__dirname,'public')))
 
 //Available Routes
+app.use("/api/user", require('./routes/User'))
 app.use("/api/auth",require('./routes/auth'))
 app.use("/api/v1/media",require('./routes/media'))
 
