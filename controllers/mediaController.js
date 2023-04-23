@@ -18,6 +18,7 @@ exports.create=async(req,res)=>{
             description : req.body.description,
             category : req.body.category,
             speaker : req.body.speaker,
+            thumbnail : req.body.thumbnail,
             videos : req.body.videos
         })
         res.send(createMedia)
