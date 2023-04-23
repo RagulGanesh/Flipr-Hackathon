@@ -83,3 +83,14 @@ exports.add = async(req,res)=>{
     }
 }
 
+exports.categoryList = async(req,res)=>{
+    const cat = req.params.category
+    try{
+        const cards = await Media.find({category : cat});
+        res.status(200).json(cards);
+    }catch(err){
+        console.log(err)
+        res.status(400).json({"err" : "error"})
+    }
+}
+

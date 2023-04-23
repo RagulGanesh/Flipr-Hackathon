@@ -35,6 +35,9 @@ app.use(cors())
 
 router.get('/all',mediaController.getAll)
 
+
+router.get('/:category',mediaController.categoryList)
+
 router.post('/create',mediaController.create)
 
 router.put('/add',mediaController.add)
