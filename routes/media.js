@@ -37,6 +37,8 @@ router.get('/all',mediaController.getAll)
 
 router.post('/create',mediaController.create)
 
+router.put('/add',mediaController.add)
+
 router.delete('/deleteitem/:id',mediaController.deleteItem)
 
 router.get('/getmedia/:id',mediaController.getItem)

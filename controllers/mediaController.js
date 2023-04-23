@@ -19,10 +19,9 @@ exports.create=async(req,res)=>{
             description : req.body.description,
             category : req.body.category,
             speaker : req.body.speaker,
-            thumbnail : fs.readFileSync(req.body.thumbnail).toString("base64"),
+            thumbnail : req.body.thumbnail,
             videos : req.body.videos
         })
-        console.log(thumbnail)
         res.send(createMedia)
         
 
@@ -68,6 +67,19 @@ exports.search = async (req, res, next) => {
     } 
     catch (err) {
         next(err);
+    }
+}
+
+exports.add = async(req,res)=>{
+    const thumbnail = req.body.thumbnail
+    const videos = req.body.videos
+    try{
+        const update = await Media.findOneAndUpdate({videos},{thumbnail},{new : true});
+        res.status(200).json(update)
+    }
+    catch(err){
+        console.log(err)
+        res.status(400).json({"err" : "error"})
     }
 }
 
