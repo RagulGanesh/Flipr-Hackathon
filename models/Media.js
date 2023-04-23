@@ -21,7 +21,7 @@ const MediaSchema = new Schema({
     },
     thumbnail:{
         type: String,
-        required: true,
+        // required: true,
     },
     videos:{
         type: String,

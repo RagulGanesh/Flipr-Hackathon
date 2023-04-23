@@ -47,3 +47,27 @@ exports.deleteItem=async(req,res)=>{
         res.status(500).send("Internal Server Error");
       }
 }
+
+exports.getItem = async(req,res) =>{
+    try {
+        let note = await Media.findById(req.params.id);
+        return res.json({note});
+      } catch (error) {
+        console.log(error.message);
+        res.status(500).send("Internal Server Error");
+      }
+}
+
+exports.search = async (req, res, next) => {
+    const query = req.body.query;
+    try {
+        const videos = await Media.find({
+        name: { $regex: query, $options: "i" },
+      }).limit(40);
+      res.status(200).json(videos);
+    } 
+    catch (err) {
+        next(err);
+    }
+}
+
