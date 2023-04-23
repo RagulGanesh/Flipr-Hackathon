@@ -1,4 +1,5 @@
 const Media=require("../models/Media")
+const fs = require('fs')
 
 exports.getAll=async(req,res)=>{
     try{
@@ -18,10 +19,12 @@ exports.create=async(req,res)=>{
             description : req.body.description,
             category : req.body.category,
             speaker : req.body.speaker,
-            thumbnail : req.body.thumbnail,
+            thumbnail : fs.readFileSync(req.body.thumbnail).toString("base64"),
             videos : req.body.videos
         })
+        console.log(thumbnail)
         res.send(createMedia)
+        
 
     }catch(err){
         console.log(err)

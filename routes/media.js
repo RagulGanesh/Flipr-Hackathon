@@ -1,12 +1,15 @@
 const express = require("express");
 const router = express.Router();
 var fetchuser = require('../middleware/fetchuser')
+var cors = require('cors')
 
 const mediaController=require('../controllers/mediaController')
 const multer=require('multer')
 
 const fs=require('fs')
 const path=require('path')
+const app = express()
+app.use(cors())
 
 // const storage=multer.diskStorage({
 //     destination:function(req,file,cb){
